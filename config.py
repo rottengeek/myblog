@@ -4,13 +4,13 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
-    MAIL_SERVER = 'smtp.qq.com'
+    MAIL_SERVER = 'smtp.163.com'
     MAIL_PORT = 25
     MAIL_USE_TLS = True
-    MAIL_USERNAME = '980742271@qq.com'
-    MAIL_PASSWORD = 'daitoudi123\\'
+    MAIL_USERNAME = 'clementdai@163.com'
+    MAIL_PASSWORD = 'a12345678'
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = '980742271@qq.com'
+    FLASKY_MAIL_SENDER = 'clementdai@163.com'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
