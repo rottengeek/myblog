@@ -63,6 +63,11 @@ class Role(db.Model):
         self.permissions = 0
 
     def has_permission(self, perm):
+        """
+        位与运算 1 2 4 8 16
+        返回真表示 存在  返回假 表示不能存在该权限 如
+        (1 + 2) & 2 == 2  (1+2) & 4 == 0
+        """
         return self.permissions & perm == perm
 
     def __repr__(self):
@@ -78,7 +83,12 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     confirmed = db.Column(db.Boolean, default=False)
 
+
     def __init__(self, **kwargs):
+        """
+        管理员由保存在设置变量FLASKY_ADMIN中的电子邮件地址识别，只要电子邮件出现在
+        注册请求中，就会被赋予管理员权限，其余用户为普通用户
+        """
         super(User, self).__init__(**kwargs)
         if self.role is None:
             if self.email == current_app.config['FLASKY_ADMIN']:
@@ -157,6 +167,9 @@ class User(UserMixin, db.Model):
         return True
 
     def can(self, perm):
+        """
+        角色存在并有该权限
+        """
         return self.role is not None and self.role.has_permission(perm)
 
     def is_administrator(self):
